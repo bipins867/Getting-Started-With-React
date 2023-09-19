@@ -7,13 +7,13 @@ function App() {
     {
       title: "Petrol",
       amount: 198.4,
-      date: new Date().toISOString(),
+      date: new Date(),
       location: "Gorakhpur",
     },
     {
       title: "Groceries",
       amount: 75.0,
-      date: new Date("2023-09-15").toISOString(),
+      date: new Date("2023-05-15"),
       location: "Supermarket",
     },
     // Add more expense items as needed
