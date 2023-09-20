@@ -20,21 +20,30 @@ export default ()=> {
   ];
   
   const expenseList=expenses.map((expense,keyId)=>{
-    return <ExpenseItem
+    const expense_id=`expense_${keyId}`
+    const expenseItem= <ExpenseItem
       key={keyId}
       amount={expense.amount}
       title={expense.title}
       date={expense.date}
       location={expense.location}
+      functionName={deleteExpense}
+      id={expense_id}
     />;
+    function deleteExpense(){
+      const divCont=document.getElementById('list-expense')
+      const childCont=document.getElementById(expense_id)
+      divCont.removeChild(childCont)
+    }
+    return expenseItem
   })
   //console.log(expenseList)
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div id='list-expense' className="App">
+      
         {expenseList}
-      </header>
+      
     </div>
   );
 }
