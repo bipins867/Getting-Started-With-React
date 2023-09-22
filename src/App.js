@@ -21,29 +21,39 @@ export default ()=> {
     // Add more expense items as needed
   ];
   
-  const expenseList=expenses.map((expense,keyId)=>{
-    const expense_id=`expense_${keyId}`
-    const expenseItem= <ExpenseItem
-      key={keyId}
-      amount={expense.amount}
-      title={expense.title}
-      date={expense.date}
-      functionName={deleteExpense}
-      id={expense_id}
-    />;
-    function deleteExpense(){
-      const divCont=document.getElementById('list-expense')
-      const childCont=document.getElementById(expense_id)
-      divCont.removeChild(childCont)
+  
+  function expenseCreator(expense,keyId){
+    const expense_id = `expense_${keyId}`;
+    
+    const expenseItem = (
+      <ExpenseItem
+        key={keyId}
+        amount={expense.amount}
+        title={expense.title}
+        date={expense.date}
+        functionName={deleteExpense}
+        id={expense_id}
+      />
+    );
+    
+    function deleteExpense() {
+      const divCont = document.getElementById("list-expense");
+      const childCont = document.getElementById(expense_id);
+      divCont.removeChild(childCont);
     }
     return expenseItem
+  }
+  const expenseTempList=expenses.map((expense,keyId)=>{
+    
+    return expenseCreator(expense,keyId)
   })
+  const [expenseList, setNewExpense] = useState(expenseTempList);
   //console.log(expenseList)
  
   
   return (
     <div>
-      <NewExpense/>      
+      <NewExpense/>
       <div id="list-expense" className="App">
         {expenseList}
       </div>
