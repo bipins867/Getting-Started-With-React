@@ -49,11 +49,16 @@ export default ()=> {
   })
   const [expenseList, setNewExpense] = useState(expenseTempList);
   //console.log(expenseList)
- 
+  function addExpenseHandler(expenseObj){
+    const expense=expenseCreator(expenseObj,expenseList.length)
+    const newExpenseList=[...expenseList,expense]
+    setNewExpense(newExpenseList)
+    
+  }
   
   return (
     <div>
-      <NewExpense/>
+      <NewExpense onAddExpense={addExpenseHandler}/>
       <div id="list-expense" className="App">
         {expenseList}
       </div>

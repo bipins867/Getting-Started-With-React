@@ -41,7 +41,10 @@ export default (props) => {
     event.preventDefault();
    
     const obj={amount:enteredAmount,title:enteredTitle,date:new Date(enteredDate)}
-    console.log(obj)
+    props.onSaveData(obj);
+    updateTitle('')
+    updateAmount('')
+    updateDate('')
   }
   
   return (
@@ -49,15 +52,15 @@ export default (props) => {
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" onChange={onTitleChange} />
+          <input type="text" value={enteredTitle} onChange={onTitleChange} />
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
-          <input type="number" onChange={onAmountChange} />
+          <input type="number" value={enteredAmount} onChange={onAmountChange} />
         </div>
         <div className="new-expense__control">
           <label>Date</label>
-          <input type="date" onChange={onDateChange} />
+          <input type="date" value={enteredDate} onChange={onDateChange} />
         </div>
       </div>
       <div className="new-expense__actions">
