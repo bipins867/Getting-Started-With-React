@@ -4,7 +4,6 @@ import React,{useState} from 'react';
 export default (props) => {
   
   
-  let expenseLocation = props.location;
   const [expenseTitle,setTitle]=useState(props.title);
   const [expenseAmount,setAmount]=useState(props.amount)
   //console.log("Main Function Called")
@@ -22,7 +21,6 @@ export default (props) => {
   return (
     <div className="expense-item__description">
       <h2>{expenseTitle}</h2>
-      <h6>{expenseLocation}</h6>
       <div className="expense-item__price">${expenseAmount}</div>
       <button onClick={props.functionName}>Delete</button>
       <button onClick={updateTitle}>Change Title</button>

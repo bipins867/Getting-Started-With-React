@@ -2,19 +2,21 @@ import logo from "./logo.svg";
 import "./App.css";
 import ExpenseItem from "./components/Expenses/ExpenseItem";
 
+import { useState } from "react";
+
+import NewExpense from "./components/NewExpense/NewExpense";
+
 export default ()=> {
   const expenses = [
     {
       title: "Petrol",
       amount: 198.4,
       date: new Date(),
-      location: "Gorakhpur",
     },
     {
       title: "Groceries",
       amount: 75.0,
       date: new Date("2023-05-15"),
-      location: "Supermarket",
     },
     // Add more expense items as needed
   ];
@@ -26,7 +28,6 @@ export default ()=> {
       amount={expense.amount}
       title={expense.title}
       date={expense.date}
-      location={expense.location}
       functionName={deleteExpense}
       id={expense_id}
     />;
@@ -38,12 +39,14 @@ export default ()=> {
     return expenseItem
   })
   //console.log(expenseList)
-
+ 
+  
   return (
-    <div id='list-expense' className="App">
-      
+    <div>
+      <NewExpense/>      
+      <div id="list-expense" className="App">
         {expenseList}
-      
+      </div>
     </div>
   );
 }
