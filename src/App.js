@@ -1,70 +1,56 @@
-import logo from "./logo.svg";
-import "./App.css";
-import ExpenseItem from "./components/Expenses/ExpenseItem";
+import React, { useState } from 'react';
 
-import { useState } from "react";
+import NewExpense from './components/NewExpense/NewExpense';
+import Expenses from './components/Expenses/Expenses';
 
-import NewExpense from "./components/NewExpense/NewExpense";
-
-export default ()=> {
-  const expenses = [
+const Initial_Expenses = [
     {
-      title: "Petrol",
-      amount: 198.4,
-      date: new Date(),
+      id: 'e1',
+      title: 'Toilet Paper',
+      amount: 94.12,
+      date: new Date(2020, 7, 14),
+    },
+    { id: 'e2', title: 'New TV', amount: 799.49, date: new Date(2021, 2, 12) },
+    {
+      id: 'e3',
+      title: 'Car Insurance',
+      amount: 294.67,
+      date: new Date(2021, 2, 28),
     },
     {
-      title: "Groceries",
-      amount: 75.0,
-      date: new Date("2023-05-15"),
+      id: 'e4',
+      title: 'New Desk (Wooden)',
+      amount: 450,
+      date: new Date(2021, 5, 12),
     },
-    // Add more expense items as needed
   ];
+const App = () => {
   
-  
-  function expenseCreator(expense,keyId){
-    const expense_id = `expense_${keyId}`;
+
+  const [expenses,setExpenses]=useState(Initial_Expenses)
+
+  const addExpenseHandler = expense => {
+    setExpenses(prevExpense=>{
+      const nExpense = [expense, ...prevExpense];
+      
+      return nExpense
+    })
     
-    const expenseItem = (
-      <ExpenseItem
-        key={keyId}
-        amount={expense.amount}
-        title={expense.title}
-        date={expense.date}
-        functionName={deleteExpense}
-        id={expense_id}
-      />
-    );
-    
-    function deleteExpense() {
-      const divCont = document.getElementById("list-expense");
-      const childCont = document.getElementById(expense_id);
-      divCont.removeChild(childCont);
-    }
-    return expenseItem
-  }
-  const expenseTempList=expenses.map((expense,keyId)=>{
-    
-    return expenseCreator(expense,keyId)
-  })
-  const [expenseList, setNewExpense] = useState(expenseTempList);
-  //console.log(expenseList)
-  function addExpenseHandler(expenseObj){
-    const expense=expenseCreator(expenseObj,expenseList.length)
-    const newExpenseList=[...expenseList,expense]
-    setNewExpense(newExpenseList)
-    
-  }
-  
+  };
+
+  // return React.createElement(
+  //   'div',
+  //   {},
+  //   React.createElement('h2', {}, "Let's get started!"),
+  //   React.createElement(Expenses, { items: expenses })
+  // );
+
   return (
     <div>
-      <NewExpense onAddExpense={addExpenseHandler}/>
-      <div id="list-expense" className="App">
-        {expenseList}
-      </div>
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses items={expenses} />
     </div>
   );
 }
 
-
-
+export default App;
